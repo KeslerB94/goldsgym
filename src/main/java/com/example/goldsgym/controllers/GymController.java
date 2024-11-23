@@ -1,41 +1,28 @@
 package com.example.goldsgym.controllers;
 
-import com.example.goldsgym.dtos.GymDto;
 import com.example.goldsgym.models.Gym;
+import com.example.goldsgym.services.GymService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/gyms")
+@RequestMapping("/api/gyms")
 public class GymController {
 
     @Autowired
-    private com.example.goldsgym.services.GymService gymService;
+    private GymService gymService;
 
-    @PostMapping
-    public Gym createGym(@RequestBody Gym gym) {
-        return gymService.createGym(gym);
-    }
-
-    @GetMapping("/{id}")
-    public Gym getGymById(@PathVariable int id) {
-        return gymService.getGymById(id);
-    }
-
+    // Get all gyms
     @GetMapping
     public List<Gym> getAllGyms() {
         return gymService.getAllGyms();
     }
 
-    @PutMapping("/{id}")
-    public Gym updateGym(@PathVariable int id, @RequestBody GymDto gymDto) {
-        return gymService.updateGym(id, gymDto);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteGymById(@PathVariable int id) {
-        gymService.deleteGymById(id);
+    // Get gym by ID
+    @GetMapping("/{id}")
+    public Gym getGymById(@PathVariable int id) {
+        return gymService.getGymById(id); // Return null if not found
     }
 }

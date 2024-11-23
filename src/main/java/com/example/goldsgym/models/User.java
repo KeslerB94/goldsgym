@@ -1,11 +1,10 @@
 package com.example.goldsgym.models;
 
-import jakarta.persistence.Table;
+
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import jakarta.persistence.*;
 
 @Entity
 @Table(name = "users")
@@ -25,4 +24,9 @@ public class User {
 
     @Column(name = "address")
     private String address;
+
+    // Many Users belong to one Gym
+    @ManyToOne
+    @JoinColumn(name = "gym_id")
+    private Gym gym;
 }
